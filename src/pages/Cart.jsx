@@ -1,10 +1,16 @@
 import { useCart } from "../context/CartContext"
 import { Trash2, Plus, Minus, Send } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { toast } from "react-hot-toast"
+import { useEffect } from "react"
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart()
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "Panier | BK Beauty"
+  }, [location])
 
   const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) {
@@ -134,6 +140,12 @@ const Cart = () => {
                 <Send className="h-5 w-5" />
                 Commander via WhatsApp
               </button>
+              <Link
+                to="/products"
+                className="w-full mt-2 border border-rose-500 text-rose-500 py-3 px-6 rounded-lg hover:bg-rose-50 transition-colors flex items-center justify-center gap-2"
+              >
+                Continuer les achats
+              </Link>
             </div>
           </div>
         </div>

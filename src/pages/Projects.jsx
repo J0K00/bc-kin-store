@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Github, ExternalLink } from 'lucide-react'
+import { useLocation } from "react-router-dom"
 
 const Projects = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "Projets | BK Beauty"
+  }, [location])
+
   const projects = [
     {
       title: "Application E-commerce",

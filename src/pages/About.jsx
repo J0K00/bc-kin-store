@@ -1,7 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Brush, Palette, Sparkles, Heart } from "lucide-react"
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
 const About = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "À propos | BK Beauty"
+  }, [location])
+
   const skills = [
     {
       title: "Maquillage",

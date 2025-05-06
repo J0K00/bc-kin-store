@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
@@ -11,8 +11,15 @@ import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popove
 import { format } from "date-fns"
 import { fr } from "date-fns/locale"
 import { cn } from "../lib/utils"
+import { useLocation } from "react-router-dom"
 
 const Contact = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "Contact | BK Beauty"
+  }, [location])
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

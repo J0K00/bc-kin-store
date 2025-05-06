@@ -1,6 +1,14 @@
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
 
 const Products = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "Produits | BK Beauty"
+  }, [location])
+
   // Simulons des données de produits (à remplacer par vos vraies données)
   const products = [
     {

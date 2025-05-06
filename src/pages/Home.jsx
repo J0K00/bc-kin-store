@@ -1,26 +1,19 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
 import { Button } from "../components/ui/button"
 import Cover from "../components/Cover"
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
 const Home = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = "Accueil | BK Beauty"
+  }, [location])
+
   return (
     <>
       <Cover />
-      <div className="container mx-auto px-12 py-8">
-        <h1 className="text-4xl font-bold text-center text-rose-500 mb-6">CEO</h1>
-        
-        <div className="grid grid-cols-2 border-t-2 border-rose-200 pt-8 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-white border-rose-200">
-              <div className="">
-                <img src="/images/ceo.jpg" className="w-full h-full object-cover rounded-lg shadow-sm" alt="" />
-              </div>
-            
-          </Card>
-
-        </div>
-        
-      </div>
-
       <div className="container mx-auto px-12 py-8">
         <h1 className="text-4xl font-bold text-center text-rose-500 mb-6">Nos Modèles</h1>
         
