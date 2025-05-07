@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
+import CustomToast from '../components/CustomToast'
 
 const CartContext = createContext()
 
@@ -11,71 +13,89 @@ export const useCart = () => {
 }
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    // Récupérer le panier du localStorage au chargement
+  const [cartItems, setCartItems] = useState([])
+
+  // Charger le panier depuis le localStorage au démarrage
+  useEffect(() => {
     const savedCart = localStorage.getItem('cart')
-    return savedCart ? JSON.parse(savedCart) : []
-  })
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart))
+    }
+  }, [])
 
   // Sauvegarder le panier dans le localStorage à chaque modification
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
+    localStorage.setItem('cart', JSON.stringify(cartItems))
+  }, [cartItems])
+
+  const showCustomToast = (message) => {
+    // Dismiss any existing toasts
+    toast.dismiss()
+    
+    // Show new toast
+    toast.custom(
+      (t) => (
+        <CustomToast
+          message={message}
+          onClose={() => {
+            toast.dismiss(t.id)
+          }}
+        />
+      ),
+      {
+        duration: 3000,
+        position: 'top-right',
+      }
+    )
+  }
 
   const addToCart = (product) => {
-    setCart(prevCart => {
-      // Vérifier si le produit existe déjà dans le panier
-      const existingProduct = prevCart.find(item => item.id === product.id)
-      
-      if (existingProduct) {
-        // Si le produit existe, augmenter la quantité
-        return prevCart.map(item =>
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id)
+      if (existingItem) {
+        return prevItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
             : item
         )
-      } else {
-        // Si le produit n'existe pas, l'ajouter avec une quantité de 1
-        return [...prevCart, { ...product, quantity: 1 }]
       }
+      return [...prevItems, { ...product, quantity: product.quantity || 1 }]
     })
+    showCustomToast('Produit ajouté au panier')
   }
 
   const removeFromCart = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId))
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId))
+    showCustomToast('Produit retiré du panier')
   }
 
   const updateQuantity = (productId, quantity) => {
     if (quantity < 1) return
-
-    setCart(prevCart =>
-      prevCart.map(item =>
-        item.id === productId
-          ? { ...item, quantity }
-          : item
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity } : item
       )
     )
   }
 
   const clearCart = () => {
-    setCart([])
+    setCartItems([])
+    showCustomToast('Panier vidé')
   }
 
   const getCartTotal = () => {
-    return cart.reduce((total, item) => {
-      // Convertir le prix en nombre (enlever le symbole de la monnaie et les espaces)
-      const price = parseFloat(item.price.replace(/[^\d.,]/g, '').replace(',', '.'))
-      return total + (price * item.quantity)
+    return cartItems.reduce((total, item) => {
+      return total + (item.price * item.quantity)
     }, 0)
   }
 
   const getCartItemsCount = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0)
+    return cartItems.reduce((total, item) => total + item.quantity, 0)
   }
 
   return (
     <CartContext.Provider value={{
-      cart,
+      cartItems,
       addToCart,
       removeFromCart,
       updateQuantity,

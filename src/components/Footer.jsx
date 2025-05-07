@@ -1,135 +1,71 @@
-import { Button } from "./ui/button"
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react"
 import { Link } from "react-router-dom"
+import { Facebook, Instagram, Twitter } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-rose-200">
+    <footer className="bg-bc-black text-bc-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* À propos */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-rose-500">BK Beauty</h3>
-            <p className="text-gray-600">
-              Votre destination beauté pour des produits de qualité et des conseils experts en maquillage.
+          {/* Logo et description */}
+          <div className="col-span-1 md:col-span-2">
+            <h2 className="text-2xl font-bold text-bc-orange mb-4">BC KIN STORE</h2>
+            <p className="text-gray-300 mb-4">
+              Votre destination de mode pour des sacs, lunettes et chaussures tendance.
+              Découvrez notre collection exclusive aux couleurs orange, blanc et noir.
             </p>
             <div className="flex space-x-4">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="rounded-full text-gray-600 hover:text-rose-500"
-                asChild
-              >
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  <Instagram className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="rounded-full text-gray-600 hover:text-rose-500"
-                asChild
-              >
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                  <Facebook className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="rounded-full text-gray-600 hover:text-rose-500"
-                asChild
-              >
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                  <Youtube className="h-5 w-5" />
-                </a>
-              </Button>
+              <a href="#" className="text-gray-300 hover:text-bc-orange transition-colors">
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-bc-orange transition-colors">
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-bc-orange transition-colors">
+                <Twitter className="h-6 w-6" />
+              </a>
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Liens rapides */}
           <div>
-            <h3 className="text-lg font-semibold text-rose-500 mb-4">Navigation</h3>
+            <h3 className="text-lg font-semibold mb-4">Liens rapides</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/">
-                  <span className="text-gray-600 hover:text-rose-500">Accueil</span>
+                <Link to="/" className="text-gray-300 hover:text-bc-orange transition-colors">
+                  Accueil
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="text-gray-600 hover:text-rose-500">
+                <Link to="/products" className="text-gray-300 hover:text-bc-orange transition-colors">
                   Produits
                 </Link>
               </li>
               <li>
-                <Link to="/tutorials" className="text-gray-600 hover:text-rose-500">
-                  Tutoriels
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-gray-600 hover:text-rose-500">
+                <Link to="/about" className="text-gray-300 hover:text-bc-orange transition-colors">
                   À propos
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-600 hover:text-rose-500">
+                <Link to="/contact" className="text-gray-300 hover:text-bc-orange transition-colors">
                   Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-lg font-semibold text-rose-500 mb-4">Services</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-600 hover:text-rose-500">
-                  Consultation Beauté
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-rose-500">
-                  Ateliers Maquillage
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-rose-500">
-                  Soins Esthétiques
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-rose-500">
-                  Livraison Express
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold text-rose-500 mb-4">Contact</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-gray-600">
-                <Mail className="h-5 w-5 text-rose-500" />
-                bkbeauty@gmail.com
-              </li>
-              <li className="flex items-center gap-2 text-gray-600">
-                <Phone className="h-5 w-5 text-rose-500" />
-                +243 829 941 808
-              </li>
-              <li className="flex items-center gap-2 text-gray-600">
-                <MapPin className="h-5 w-5 text-rose-500" />
-                Lemba Terminus, Kinshasa
-              </li>
+            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <ul className="space-y-2 text-gray-300">
+              <li>Email: contact@bckinstore.com</li>
+              <li>Tél: +33 1 23 45 67 89</li>
+              <li>Adresse: 123 Rue de la Mode, Paris</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-rose-200">
-          <p className="text-center text-gray-600">
-            © 2025 BK Beauty. Tous droits réservés.
-          </p>
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+          <p>&copy; {new Date().getFullYear()} BC KIN STORE. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
