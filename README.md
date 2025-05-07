@@ -23,7 +23,7 @@ Une boutique en ligne moderne pour les accessoires de mode, construite avec Reac
 
 1. Clonez le dépôt :
 ```bash
-git clone https://github.com/votre-username/bc-kin-store.git
+git clone https://github.com/J0K00/bc-kin-store.git
 cd bc-kin-store
 ```
 
